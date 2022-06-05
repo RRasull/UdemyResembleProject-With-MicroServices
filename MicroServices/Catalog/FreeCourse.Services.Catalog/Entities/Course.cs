@@ -22,5 +22,7 @@ namespace FreeCourse.Services.Catalog.Entities
         public Category Category { get; set; }
 
         public string UserId { get; set; }
+
+        public Feature Feature { get; set; }
     }
 }
