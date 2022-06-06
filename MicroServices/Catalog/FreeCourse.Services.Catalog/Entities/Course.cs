@@ -6,7 +6,7 @@ namespace FreeCourse.Services.Catalog.Entities
     public class Course : BaseEntity
     {
         [BsonRepresentation(BsonType.Decimal128)]
-        public double Price { get; set; }
+        public decimal Price { get; set; }
 
         public string Picture { get; set; }
         public string Description { get; set; }

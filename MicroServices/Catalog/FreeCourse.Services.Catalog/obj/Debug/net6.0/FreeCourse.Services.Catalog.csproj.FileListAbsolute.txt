@@ -41,3 +41,5 @@ C:\Users\Rasul\source\repos\UdemyMicroservices\MicroServices\Catalog\FreeCourse.
 C:\Users\Rasul\source\repos\UdemyMicroservices\MicroServices\Catalog\FreeCourse.Services.Catalog\bin\Debug\net6.0\runtimes\linux\native\libmongocrypt.so
 C:\Users\Rasul\source\repos\UdemyMicroservices\MicroServices\Catalog\FreeCourse.Services.Catalog\bin\Debug\net6.0\runtimes\osx\native\libmongocrypt.dylib
 C:\Users\Rasul\source\repos\UdemyMicroservices\MicroServices\Catalog\FreeCourse.Services.Catalog\bin\Debug\net6.0\runtimes\win\native\mongocrypt.dll
+C:\Users\Rasul\source\repos\UdemyMicroservices\MicroServices\Catalog\FreeCourse.Services.Catalog\bin\Debug\net6.0\AutoMapper.dll
+C:\Users\Rasul\source\repos\UdemyMicroservices\MicroServices\Catalog\FreeCourse.Services.Catalog\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
