@@ -15,7 +15,7 @@ namespace FreeCourse.Shared.DTOs
         public int StatusCode { get; private set; }
 
         [JsonIgnore]
-        public bool isSucceeded { get; set; }
+        public bool isSucceeded { get; private set; }
 
         public List<string> Errors { get; set; }
 
