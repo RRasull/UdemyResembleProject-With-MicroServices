@@ -27,6 +27,32 @@ namespace FreeCourse.Services.Catalog.Services
             return Response<List<CategoryDto>>.Succeeded(_mapper.Map<List<CategoryDto>>(categories), 200);
         }
 
-       
+        public async Task<Response<CategoryDto>> GetByIdAsync(string id)
+        {
+            var category = _categoryCollection.Find(x => x.Id == id).FirstOrDefault();
+
+            if (category is null)
+            {
+                return Response<CategoryDto>.Failed("Category not found", 404);
+            }
+
+            return Response<CategoryDto>.Succeeded(_mapper.Map<CategoryDto>(category), 200);
+        }
+
+        public async Task<Response<CategoryDto>> CreateAsync(Category category)
+        {
+            if (category is null)
+            {
+                return Response<CategoryDto>.Failed("Category not found", 404);
+
+            }
+
+            await _categoryCollection.InsertOneAsync(category);
+            return Response<CategoryDto>.Succeeded(_mapper.Map<CategoryDto>(category), 200);
+        }
+
+
+
+
     }
 }
