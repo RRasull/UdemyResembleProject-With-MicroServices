@@ -2,6 +2,7 @@
 using FreeCourse.Services.Catalog.DTOs;
 using FreeCourse.Services.Catalog.Entities;
 using FreeCourse.Services.Catalog.Settings;
+using FreeCourse.Shared.DTOs;
 using MongoDB.Driver;
 
 namespace FreeCourse.Services.Catalog.Services
@@ -19,6 +20,13 @@ namespace FreeCourse.Services.Catalog.Services
             _mapper = mapper;
         }
 
+        public async Task<Response<List<CategoryDto>>> GetAllAsync()
+        {
+            List<Category> categories = await _categoryCollection.Find(category => true).ToListAsync();
 
+            return Response<List<CategoryDto>>.Succeeded(_mapper.Map<List<CategoryDto>>(categories), 200);
+        }
+
+       
     }
 }
