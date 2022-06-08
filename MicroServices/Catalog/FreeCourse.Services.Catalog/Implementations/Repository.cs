@@ -13,12 +13,12 @@ namespace FreeCourse.Services.Catalog.Implementations
         public Repository(IDatabaseSettings databaseSettings)
         {
             var client = new MongoClient(databaseSettings.ConnectionString);
-            var database = client.GetDatabase(databaseSettings.DatabaseName);
-            _categoryCollection = database.GetCollection<TEntity>(databaseSettings.CourseCollectionName);
+            IMongoDatabase database = client.GetDatabase(databaseSettings.DatabaseName);
+            //_categoryCollection = database.GetCollection<TEntity>(databaseSettings.CourseCollectionName);
         }
-        public Task CreateAsync(TEntity entity)
+        public async Task CreateAsync(TEntity entity)
         {
-            throw new NotImplementedException();
+           throw new NotImplementedException();
         }
 
         public Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> exp = null, params string[] includes)

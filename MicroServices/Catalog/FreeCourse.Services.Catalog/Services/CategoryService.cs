@@ -7,7 +7,7 @@ using MongoDB.Driver;
 
 namespace FreeCourse.Services.Catalog.Services
 {
-    public class CategoryService
+    public class CategoryService : ICategoryService
     {
         private readonly IMapper _mapper;
         private readonly IMongoCollection<Category> _categoryCollection;
@@ -50,9 +50,6 @@ namespace FreeCourse.Services.Catalog.Services
             await _categoryCollection.InsertOneAsync(category);
             return Response<CategoryDto>.Succeeded(_mapper.Map<CategoryDto>(category), 200);
         }
-
-
-
 
     }
 }
