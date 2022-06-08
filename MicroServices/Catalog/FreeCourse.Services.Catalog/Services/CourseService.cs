@@ -57,7 +57,7 @@ namespace FreeCourse.Services.Catalog.Services
 
         public async Task<Response<CourseDto>> CreateAsync(Course course)
         {
-            if(course is null)
+            if (course is null)
             {
                 return Response<CourseDto>.Failed("Course has not found", 404);
             }
@@ -66,5 +66,23 @@ namespace FreeCourse.Services.Catalog.Services
             return Response<CourseDto>.Succeeded(_mapper.Map<CourseDto>(course), 200);
         }
 
+        public async Task<Response<List<CourseDto>>> GetAllByUserId(string userId)
+        {
+            var courses = await _courseCollection.Find<Course>(x => x.UserId == userId).ToListAsync();
+
+            if (courses.Any())
+            {
+                foreach (var course in courses)
+                {
+                    course.Category = await _categoryCollection.Find<Category>(x => x.Id == course.CategoryId).FirstAsync();
+                }
+            }
+            else
+            {
+                courses = new List<Course>();
+            }
+
+            return Response<List<CourseDto>>.Succeeded(_mapper.Map<List<CourseDto>>(courses), 200);
+        }
     }
 }
