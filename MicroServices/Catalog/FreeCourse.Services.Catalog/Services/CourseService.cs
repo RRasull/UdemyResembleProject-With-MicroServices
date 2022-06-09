@@ -55,13 +55,14 @@ namespace FreeCourse.Services.Catalog.Services
             return Response<CourseDto>.Succeeded(_mapper.Map<CourseDto>(course), 200);
         }
 
-        public async Task<Response<CourseDto>> CreateAsync(Course course)
+        public async Task<Response<CourseDto>> CreateAsync(CourseCreateDto courseCreateDto)
         {
-            if (course is null)
+            if (courseCreateDto is null)
             {
                 return Response<CourseDto>.Failed("Course has not found", 404);
             }
 
+            Course course = _mapper.Map<Course>(courseCreateDto);
             await _courseCollection.InsertOneAsync(course);
             return Response<CourseDto>.Succeeded(_mapper.Map<CourseDto>(course), 200);
         }
@@ -83,6 +84,50 @@ namespace FreeCourse.Services.Catalog.Services
             }
 
             return Response<List<CourseDto>>.Succeeded(_mapper.Map<List<CourseDto>>(courses), 200);
+        }
+
+        public async Task<Response<NoContent>> UpdateAsync(CourseUpdateDto courseUpdateDto)
+        {
+            if (courseUpdateDto is null)
+            {
+                return Response<NoContent>.Failed("Course has not found", 404);
+            }
+
+            Course updateCourse = _mapper.Map<Course>(courseUpdateDto);
+            var result = await _courseCollection.FindOneAndReplaceAsync(x => x.Id == updateCourse.Id, updateCourse);
+
+            if (result is null)
+            {
+                return Response<NoContent>.Failed("Course has not found", 404);
+            }
+
+            return Response<NoContent>.Succeeded(204);
+
+        }
+
+        public async Task<Response<NoContent>> DeleteAsync(string id)
+        {
+            var course = await _courseCollection.FindAsync(x => x.Id == id);
+            if (course is null)
+            {
+                return Response<NoContent>.Failed("Course has not found", 404);
+            }
+
+            var result = await _courseCollection.DeleteOneAsync(x => x.Id == id);
+
+            //to make sure course is deleted
+            if (result.DeletedCount > 0)
+            {
+                //if the count is more than 0, then the course is deleted successfully
+                return Response<NoContent>.Succeeded(204);
+            }
+            else
+            {
+                //the course couldn't be found in the database
+                return Response<NoContent>.Failed("Course not found", 404);
+            }
+            return Response<NoContent>.Succeeded(204);
+
         }
     }
 }

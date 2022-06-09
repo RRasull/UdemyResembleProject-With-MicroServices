@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FreeCourse.Shared.DTOs
 {
-    public class NoContentDto
+    public class NoContent
     {
     }
 }
