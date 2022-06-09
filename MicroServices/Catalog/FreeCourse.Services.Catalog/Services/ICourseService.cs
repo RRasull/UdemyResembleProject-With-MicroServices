@@ -11,5 +11,6 @@ namespace FreeCourse.Services.Catalog.Services
         Task<Response<CourseDto>> CreateAsync(CourseCreateDto courseCreateDto);
         Task<Response<List<CourseDto>>> GetAllByUserId(string userId);
         Task<Response<NoContent>> UpdateAsync(CourseUpdateDto courseUpdateDto);
+        Task<Response<NoContent>> DeleteAsync(string id);
     }
 }
